@@ -1,0 +1,223 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<style>
+
+/* =========================
+   ADMIN DASHBOARD DESIGN
+========================= */
+
+body{
+    background:#f4f7fc;
+    font-family:'Poppins',sans-serif;
+}
+
+/* PAGE TITLE */
+
+.dashboard-title{
+    font-size:42px;
+    font-weight:700;
+    text-align:center;
+    color:#0d1b2a;
+    margin-bottom:45px;
+    position:relative;
+}
+
+.dashboard-title::after{
+    content:'';
+    width:140px;
+    height:4px;
+    background:linear-gradient(to right,#007bff,#00c6ff);
+    display:block;
+    margin:12px auto 0;
+    border-radius:20px;
+}
+
+/* DASHBOARD CARD */
+
+.dashboard-card{
+    border:none;
+    border-radius:24px;
+    overflow:hidden;
+    color:white;
+    padding:35px 25px;
+    text-align:center;
+    transition:0.4s;
+    box-shadow:0 12px 30px rgba(0,0,0,0.08);
+    position:relative;
+}
+
+.dashboard-card:hover{
+    transform:translateY(-8px);
+    box-shadow:0 18px 45px rgba(0,0,0,0.12);
+}
+
+/* CARD ICON */
+
+.card-icon{
+    font-size:55px;
+    margin-bottom:18px;
+}
+
+/* CARD NUMBER */
+
+.dashboard-card h3{
+    font-size:42px;
+    font-weight:700;
+    margin-bottom:10px;
+}
+
+/* CARD TITLE */
+
+.dashboard-card h5{
+    font-size:20px;
+    font-weight:600;
+    margin:0;
+}
+
+/* CARD COLORS */
+
+.train-card{
+    background:linear-gradient(135deg,#007bff,#00c6ff);
+}
+
+.booking-card{
+    background:linear-gradient(135deg,#28a745,#20c997);
+}
+
+.user-card{
+    background:linear-gradient(135deg,#ff9800,#ffc107);
+}
+
+.category-card{
+    background:linear-gradient(135deg,#dc3545,#ff4d6d);
+}
+
+/* RESPONSIVE */
+
+@media(max-width:768px){
+
+    .dashboard-title{
+        font-size:30px;
+    }
+
+    .dashboard-card{
+        margin-bottom:20px;
+    }
+
+    .dashboard-card h3{
+        font-size:34px;
+    }
+
+    .dashboard-card h5{
+        font-size:18px;
+    }
+
+}
+
+</style>
+
+<div class="container py-5">
+
+    <!-- TITLE -->
+
+    <h2 class="dashboard-title">
+        Admin Dashboard
+    </h2>
+
+    <div class="row g-4">
+
+        <!-- TOTAL TRAINS -->
+
+        <div class="col-lg-3 col-md-6">
+
+            <div class="dashboard-card train-card">
+
+                <div class="card-icon">
+                    🚆
+                </div>
+
+                <h3>
+                    {{ total_trains }}
+                </h3>
+
+                <h5>
+                    Total Trains
+                </h5>
+
+            </div>
+
+        </div>
+
+        <!-- TOTAL BOOKINGS -->
+
+        <div class="col-lg-3 col-md-6">
+
+            <div class="dashboard-card booking-card">
+
+                <div class="card-icon">
+                    🎟
+                </div>
+
+                <h3>
+                    {{ total_bookings }}
+                </h3>
+
+                <h5>
+                    Total Bookings
+                </h5>
+
+            </div>
+
+        </div>
+
+        <!-- TOTAL USERS -->
+
+        <div class="col-lg-3 col-md-6">
+
+            <div class="dashboard-card user-card">
+
+                <div class="card-icon">
+                    👥
+                </div>
+
+                <h3>
+                    {{ total_users }}
+                </h3>
+
+                <h5>
+                    Total Users
+                </h5>
+
+            </div>
+
+        </div>
+
+        <!-- TOTAL CATEGORIES -->
+
+        <div class="col-lg-3 col-md-6">
+
+            <div class="dashboard-card category-card">
+
+                <div class="card-icon">
+                    📂
+                </div>
+
+                <h3>
+                    {{ total_categories }}
+                </h3>
+
+                <h5>
+                    Total Categories
+                </h5>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,242 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<style>
+
+/* =========================
+   CONTACT PAGE DESIGN
+========================= */
+
+body{
+    background:#f4f7fc;
+    font-family:'Poppins',sans-serif;
+}
+
+/* CONTACT WRAPPER */
+
+.contact-wrapper{
+    min-height:85vh;
+    display:flex;
+    align-items:center;
+}
+
+/* CONTACT CARD */
+
+.contact-card{
+    border:none;
+    border-radius:25px;
+    overflow:hidden;
+    background:#fff;
+    box-shadow:0 12px 35px rgba(0,0,0,0.08);
+    transition:0.4s;
+    position:relative;
+}
+
+.contact-card:hover{
+    transform:translateY(-6px);
+    box-shadow:0 18px 45px rgba(0,0,0,0.12);
+}
+
+/* TOP BORDER */
+
+.contact-card::before{
+    content:'';
+    position:absolute;
+    top:0;
+    left:0;
+    width:100%;
+    height:7px;
+    background:linear-gradient(to right,#007bff,#00c6ff);
+}
+
+/* LEFT SIDE */
+
+.contact-left{
+    background:linear-gradient(135deg,#007bff,#00c6ff);
+    color:white;
+    padding:50px 35px;
+    height:100%;
+}
+
+.contact-left h2{
+    font-size:38px;
+    font-weight:700;
+    margin-bottom:20px;
+}
+
+.contact-left p{
+    line-height:1.9;
+    font-size:16px;
+    opacity:0.95;
+}
+
+.contact-info{
+    margin-top:30px;
+}
+
+.contact-info p{
+    margin-bottom:15px;
+    font-size:15px;
+}
+
+/* RIGHT SIDE */
+
+.contact-right{
+    padding:50px 40px;
+}
+
+/* FORM INPUTS */
+
+.contact-right input,
+.contact-right textarea,
+.contact-right select{
+    width:100%;
+    border:1px solid #dce4ec;
+    border-radius:12px;
+    padding:14px 16px;
+    margin-bottom:18px;
+    outline:none;
+    transition:0.3s;
+    background:#f8fbff;
+}
+
+.contact-right input:focus,
+.contact-right textarea:focus,
+.contact-right select:focus{
+    border-color:#007bff;
+    background:white;
+    box-shadow:0 0 10px rgba(0,123,255,0.15);
+}
+
+/* LABELS */
+
+.contact-right label{
+    font-weight:600;
+    margin-bottom:8px;
+    color:#333;
+}
+
+/* BUTTON */
+
+.send-btn{
+    background:linear-gradient(to right,#007bff,#00c6ff);
+    border:none;
+    color:white;
+    padding:14px 30px;
+    border-radius:50px;
+    font-size:16px;
+    font-weight:600;
+    transition:0.3s;
+    width:100%;
+}
+
+.send-btn:hover{
+    background:linear-gradient(to right,#0056b3,#0096c7);
+    transform:scale(1.02);
+}
+
+/* RESPONSIVE */
+
+@media(max-width:768px){
+
+    .contact-left{
+        padding:35px 25px;
+        text-align:center;
+    }
+
+    .contact-right{
+        padding:35px 25px;
+    }
+
+    .contact-left h2{
+        font-size:30px;
+    }
+
+}
+
+</style>
+
+<div class="container contact-wrapper">
+
+    <div class="row justify-content-center w-100">
+
+        <div class="col-lg-10">
+
+            <div class="card contact-card">
+
+                <div class="row g-0">
+
+                    <!-- LEFT SIDE -->
+
+                    <div class="col-md-5">
+
+                        <div class="contact-left">
+
+                            <h2>
+                                Contact Us
+                            </h2>
+
+                            <p>
+
+                                Have questions about train booking,
+                                ticket reservation, payments,
+                                or railway schedules?
+
+                                Contact our support team anytime.
+
+                            </p>
+
+                            <div class="contact-info">
+
+                                <p>
+                                    📍 Chennai, Tamil Nadu
+                                </p>
+
+                                <p>
+                                    📞 +91 9876543210
+                                </p>
+
+                                <p>
+                                    ✉ railwaysystem@gmail.com
+                                </p>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <!-- RIGHT SIDE -->
+
+                    <div class="col-md-7">
+
+                        <div class="contact-right">
+
+                            <form method="POST">
+
+                                {% csrf_token %}
+
+                                {{ form.as_p }}
+
+                                <button class="send-btn">
+                                    Send Message
+                                </button>
+
+                            </form>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,277 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<style>
+
+/* =========================
+   TRAIN LIST PAGE DESIGN
+========================= */
+
+body{
+    background:#f4f7fc;
+    font-family:'Poppins',sans-serif;
+}
+
+/* PAGE TITLE */
+
+.trainlist-title{
+    font-size:42px;
+    font-weight:700;
+    text-align:center;
+    color:#0d1b2a;
+    margin-bottom:40px;
+    position:relative;
+}
+
+.trainlist-title::after{
+    content:'';
+    width:130px;
+    height:4px;
+    background:linear-gradient(to right,#007bff,#00c6ff);
+    display:block;
+    margin:12px auto 0;
+    border-radius:20px;
+}
+
+/* TRAIN CARD */
+
+.train-card{
+    border:none;
+    border-radius:24px;
+    overflow:hidden;
+    background:white;
+    box-shadow:0 10px 30px rgba(0,0,0,0.07);
+    transition:0.4s;
+    height:100%;
+}
+
+.train-card:hover{
+    transform:translateY(-8px);
+    box-shadow:0 18px 40px rgba(0,0,0,0.12);
+}
+
+/* IMAGE */
+
+.train-card img{
+    width:100%;
+    height:240px;
+    object-fit:cover;
+    transition:0.5s;
+}
+
+.train-card:hover img{
+    transform:scale(1.08);
+}
+
+/* CARD BODY */
+
+.train-card .card-body{
+    padding:25px;
+}
+
+/* TRAIN NAME */
+
+.train-name{
+    font-size:24px;
+    font-weight:700;
+    color:#222;
+    margin-bottom:15px;
+}
+
+/* ROUTE */
+
+.train-route{
+    font-size:16px;
+    color:#666;
+    margin-bottom:15px;
+    line-height:1.8;
+}
+
+/* PRICE */
+
+.train-price{
+    font-size:26px;
+    font-weight:700;
+    color:#28a745;
+    margin-bottom:22px;
+}
+
+/* BUTTON GROUP */
+
+.action-buttons{
+    display:flex;
+    gap:12px;
+}
+
+/* BUTTONS */
+
+.edit-btn,
+.delete-btn{
+    flex:1;
+    text-align:center;
+    padding:12px 0;
+    border-radius:50px;
+    text-decoration:none;
+    font-weight:600;
+    transition:0.3s;
+    color:white;
+}
+
+/* EDIT */
+
+.edit-btn{
+    background:linear-gradient(to right,#ffc107,#ff9800);
+}
+
+.edit-btn:hover{
+    background:linear-gradient(to right,#e0a800,#f57c00);
+    transform:scale(1.03);
+    color:white;
+}
+
+/* DELETE */
+
+.delete-btn{
+    background:linear-gradient(to right,#dc3545,#ff4d6d);
+}
+
+.delete-btn:hover{
+    background:linear-gradient(to right,#b02a37,#e63950);
+    transform:scale(1.03);
+    color:white;
+}
+
+/* EMPTY DATA */
+
+.empty-box{
+    background:white;
+    padding:60px 30px;
+    border-radius:25px;
+    text-align:center;
+    box-shadow:0 10px 30px rgba(0,0,0,0.06);
+}
+
+.empty-box h4{
+    color:#666;
+    font-size:28px;
+}
+
+.empty-icon{
+    font-size:70px;
+    margin-bottom:20px;
+}
+
+/* RESPONSIVE */
+
+@media(max-width:768px){
+
+    .trainlist-title{
+        font-size:30px;
+    }
+
+    .train-card img{
+        height:210px;
+    }
+
+    .train-name{
+        font-size:20px;
+    }
+
+    .action-buttons{
+        flex-direction:column;
+    }
+
+}
+
+</style>
+
+<div class="container py-5">
+
+    <!-- TITLE -->
+
+    <h2 class="trainlist-title">
+        Train List
+    </h2>
+
+    <div class="row">
+
+        {% for train in trains %}
+
+        <div class="col-lg-4 col-md-6 mb-4">
+
+            <div class="card train-card">
+
+                <img src="{{ train.image.url }}">
+
+                <div class="card-body">
+
+                    <h4 class="train-name">
+                        🚆 {{ train.name }}
+                    </h4>
+
+                    <p class="train-route">
+
+                        📍 {{ train.from_place }}
+
+                        <span class="mx-2">
+                            →
+                        </span>
+
+                        {{ train.to_place }}
+
+                    </p>
+
+                    <p class="train-price">
+                        ₹{{ train.price }}
+                    </p>
+
+                    <div class="action-buttons">
+
+                        <a href="{% url 'edit_train' train.id %}"
+                           class="edit-btn">
+
+                            ✏ Edit
+
+                        </a>
+
+                        <a href="{% url 'delete_train' train.id %}"
+                           class="delete-btn">
+
+                            🗑 Delete
+
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        {% empty %}
+
+        <div class="col-12">
+
+            <div class="empty-box">
+
+                <div class="empty-icon">
+                    🚫
+                </div>
+
+                <h4>
+                    No Trains Available
+                </h4>
+
+            </div>
+
+        </div>
+
+        {% endfor %}
+
+    </div>
+
+</div>
+
+{% endblock %}

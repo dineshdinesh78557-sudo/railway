@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="row justify-content-center">
+
+    <div class="col-md-6">
+
+        <div class="card p-4">
+
+            <h2 class="mb-4">
+                Book Ticket
+            </h2>
+
+            <h4>
+                {{ train.name }}
+            </h4>
+
+            <p>
+                ₹{{ train.price }}
+            </p>
+
+            <form method="POST">
+
+                {% csrf_token %}
+
+                {{ form.as_p }}
+
+                <button class="btn btn-success">
+                    Confirm Booking
+                </button>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

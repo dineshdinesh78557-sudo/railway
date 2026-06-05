@@ -1,0 +1,267 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<style>
+
+/* =========================
+   ADD TRAIN PAGE DESIGN
+========================= */
+
+body{
+    background:#f4f7fc;
+    font-family:'Poppins',sans-serif;
+}
+
+/* MAIN SECTION */
+
+.add-train-section{
+    min-height:90vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+
+/* CARD */
+
+.add-train-card{
+    border:none;
+    border-radius:25px;
+    overflow:hidden;
+    background:white;
+    box-shadow:0 15px 40px rgba(0,0,0,0.08);
+    transition:0.4s;
+    position:relative;
+}
+
+.add-train-card:hover{
+    transform:translateY(-6px);
+    box-shadow:0 22px 50px rgba(0,0,0,0.12);
+}
+
+/* TOP BAR */
+
+.add-train-card::before{
+    content:'';
+    position:absolute;
+    top:0;
+    left:0;
+    width:100%;
+    height:7px;
+    background:linear-gradient(to right,#007bff,#00c6ff);
+}
+
+/* LEFT SIDE */
+
+.left-side{
+    background:linear-gradient(135deg,#007bff,#00c6ff);
+    color:white;
+    padding:60px 35px;
+    height:100%;
+    text-align:center;
+}
+
+.left-side h2{
+    font-size:38px;
+    font-weight:700;
+    margin-bottom:20px;
+}
+
+.left-side p{
+    font-size:16px;
+    line-height:1.9;
+    opacity:0.95;
+}
+
+.left-icon{
+    font-size:70px;
+    margin-bottom:25px;
+}
+
+/* RIGHT SIDE */
+
+.right-side{
+    padding:50px 40px;
+}
+
+.form-title{
+    font-size:34px;
+    font-weight:700;
+    color:#0d1b2a;
+    margin-bottom:30px;
+    text-align:center;
+}
+
+/* LABELS */
+
+.right-side label{
+    font-weight:600;
+    color:#333;
+    margin-bottom:8px;
+}
+
+/* INPUTS */
+
+.right-side input,
+.right-side textarea,
+.right-side select{
+    width:100%;
+    border:1px solid #dce4ec;
+    border-radius:14px;
+    padding:14px 16px;
+    margin-top:8px;
+    margin-bottom:20px;
+    background:#f8fbff;
+    transition:0.3s;
+    outline:none;
+}
+
+.right-side input:focus,
+.right-side textarea:focus,
+.right-side select:focus{
+    border-color:#007bff;
+    background:white;
+    box-shadow:0 0 10px rgba(0,123,255,0.15);
+}
+
+/* FILE INPUT */
+
+.right-side input[type="file"]{
+    padding:10px;
+    background:white;
+}
+
+/* BUTTON */
+
+.save-btn{
+    width:100%;
+    border:none;
+    padding:14px;
+    border-radius:50px;
+    background:linear-gradient(to right,#007bff,#00c6ff);
+    color:white;
+    font-size:16px;
+    font-weight:600;
+    transition:0.3s;
+}
+
+.save-btn:hover{
+    background:linear-gradient(to right,#0056b3,#0096c7);
+    transform:scale(1.02);
+}
+
+/* HELP TEXT */
+
+.helptext{
+    display:block;
+    font-size:13px;
+    color:#777;
+    margin-top:-12px;
+    margin-bottom:15px;
+}
+
+/* ERRORS */
+
+.errorlist{
+    list-style:none;
+    padding:0;
+    margin:0 0 10px;
+    color:red;
+    font-size:14px;
+}
+
+/* RESPONSIVE */
+
+@media(max-width:768px){
+
+    .left-side{
+        padding:40px 20px;
+    }
+
+    .right-side{
+        padding:35px 25px;
+    }
+
+    .form-title{
+        font-size:28px;
+    }
+
+}
+
+</style>
+
+<div class="container add-train-section">
+
+    <div class="row justify-content-center w-100">
+
+        <div class="col-lg-11">
+
+            <div class="card add-train-card">
+
+                <div class="row g-0">
+
+                    <!-- LEFT SIDE -->
+
+                    <div class="col-md-5">
+
+                        <div class="left-side">
+
+                            <div class="left-icon">
+                                🚆
+                            </div>
+
+                            <h2>
+                                Add New Train
+                            </h2>
+
+                            <p>
+
+                                Add train details including
+                                routes, prices, descriptions,
+                                and images to manage the railway
+                                booking system easily.
+
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                    <!-- RIGHT SIDE -->
+
+                    <div class="col-md-7">
+
+                        <div class="right-side">
+
+                            <h2 class="form-title">
+                                Add Train
+                            </h2>
+
+                            <form method="POST"
+                                  enctype="multipart/form-data">
+
+                                {% csrf_token %}
+
+                                {{ form.as_p }}
+
+                                <button class="save-btn">
+                                    Save Train
+                                </button>
+
+                            </form>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

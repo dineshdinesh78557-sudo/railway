@@ -1,0 +1,254 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<style>
+
+/* =========================
+   USER DASHBOARD DESIGN
+========================= */
+
+body{
+    background:#f4f7fc;
+    font-family:'Poppins',sans-serif;
+}
+
+/* PAGE TITLE */
+
+.dashboard-title{
+    font-size:40px;
+    font-weight:700;
+    color:#0d1b2a;
+    margin-bottom:30px;
+    text-align:center;
+    position:relative;
+}
+
+.dashboard-title::after{
+    content:'';
+    width:120px;
+    height:4px;
+    background:linear-gradient(to right,#007bff,#00c6ff);
+    display:block;
+    margin:12px auto 0;
+    border-radius:20px;
+}
+
+/* SUMMARY CARD */
+
+.summary-card{
+    border:none;
+    border-radius:22px;
+    overflow:hidden;
+    background:linear-gradient(135deg,#007bff,#00c6ff);
+    color:white;
+    padding:35px;
+    box-shadow:0 12px 30px rgba(0,0,0,0.08);
+    margin-bottom:40px;
+    transition:0.4s;
+}
+
+.summary-card:hover{
+    transform:translateY(-6px);
+    box-shadow:0 18px 40px rgba(0,0,0,0.12);
+}
+
+.summary-card h4{
+    font-size:32px;
+    font-weight:700;
+    margin:0;
+}
+
+/* TABLE DESIGN */
+
+.dashboard-table{
+    background:white;
+    border-radius:20px;
+    overflow:hidden;
+    box-shadow:0 10px 30px rgba(0,0,0,0.06);
+}
+
+.dashboard-table table{
+    margin:0;
+}
+
+.dashboard-table thead{
+    background:linear-gradient(to right,#007bff,#00c6ff);
+    color:white;
+}
+
+.dashboard-table th{
+    padding:18px;
+    font-size:16px;
+    border:none;
+    text-align:center;
+}
+
+.dashboard-table td{
+    padding:18px;
+    vertical-align:middle;
+    text-align:center;
+    border-color:#eef2f7;
+    font-size:15px;
+}
+
+/* TABLE ROW HOVER */
+
+.dashboard-table tbody tr{
+    transition:0.3s;
+}
+
+.dashboard-table tbody tr:hover{
+    background:#f8fbff;
+}
+
+/* DOWNLOAD BUTTON */
+
+.download-btn{
+    background:linear-gradient(to right,#28a745,#20c997);
+    border:none;
+    padding:10px 22px;
+    color:white;
+    border-radius:40px;
+    font-size:14px;
+    font-weight:600;
+    transition:0.3s;
+    text-decoration:none;
+    display:inline-block;
+}
+
+.download-btn:hover{
+    background:linear-gradient(to right,#1e7e34,#17a589);
+    transform:scale(1.05);
+    color:white;
+}
+
+/* EMPTY DATA */
+
+.no-data{
+    text-align:center;
+    padding:40px;
+    font-size:18px;
+    color:#777;
+}
+
+/* RESPONSIVE */
+
+@media(max-width:768px){
+
+    .dashboard-title{
+        font-size:30px;
+    }
+
+    .summary-card h4{
+        font-size:24px;
+        text-align:center;
+    }
+
+    .dashboard-table{
+        overflow-x:auto;
+    }
+
+    .dashboard-table table{
+        min-width:600px;
+    }
+
+}
+
+</style>
+
+<div class="container py-5">
+
+    <!-- TITLE -->
+
+    <h2 class="dashboard-title">
+        User Dashboard
+    </h2>
+
+    <!-- SUMMARY -->
+
+    <div class="summary-card">
+
+        <h4>
+            🚆 Total Bookings : {{ total_bookings }}
+        </h4>
+
+    </div>
+
+    <!-- TABLE -->
+
+    <div class="dashboard-table">
+
+        <table class="table">
+
+            <thead>
+
+                <tr>
+
+                    <th>Train</th>
+                    <th>Seats</th>
+                    <th>Total Price</th>
+                    <th>Download Ticket</th>
+
+                </tr>
+
+            </thead>
+
+            <tbody>
+
+                {% for i in bookings %}
+
+                <tr>
+
+                    <td>
+                        {{ i.train.name }}
+                    </td>
+
+                    <td>
+                        {{ i.seats }}
+                    </td>
+
+                    <td>
+                        ₹{{ i.total_price }}
+                    </td>
+
+                    <td>
+
+                        <a href="{% url 'download_ticket' i.id %}"
+                           class="download-btn">
+
+                            Download
+
+                        </a>
+
+                    </td>
+
+                </tr>
+
+                {% empty %}
+
+                <tr>
+
+                    <td colspan="4">
+
+                        <div class="no-data">
+
+                            No bookings available.
+
+                        </div>
+
+                    </td>
+
+                </tr>
+
+                {% endfor %}
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,252 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<style>
+
+/* =========================
+   TRAIN DETAIL PAGE DESIGN
+========================= */
+
+body{
+    background:#f4f7fc;
+    font-family:'Poppins',sans-serif;
+}
+
+/* MAIN CARD */
+
+.detail-card{
+    background:white;
+    border:none;
+    border-radius:28px;
+    overflow:hidden;
+    box-shadow:0 12px 35px rgba(0,0,0,0.08);
+    transition:0.4s;
+}
+
+.detail-card:hover{
+    transform:translateY(-6px);
+    box-shadow:0 18px 45px rgba(0,0,0,0.12);
+}
+
+/* IMAGE SECTION */
+
+.train-image{
+    width:100%;
+    height:100%;
+    min-height:500px;
+    object-fit:cover;
+    transition:0.5s;
+}
+
+.image-box{
+    overflow:hidden;
+    height:100%;
+}
+
+.image-box:hover .train-image{
+    transform:scale(1.08);
+}
+
+/* DETAILS SECTION */
+
+.detail-content{
+    padding:45px;
+}
+
+/* TRAIN NAME */
+
+.train-title{
+    font-size:42px;
+    font-weight:700;
+    color:#0d1b2a;
+    margin-bottom:20px;
+}
+
+/* DIVIDER */
+
+.custom-line{
+    width:120px;
+    height:4px;
+    background:linear-gradient(to right,#007bff,#00c6ff);
+    border-radius:20px;
+    margin-bottom:30px;
+}
+
+/* INFO BOX */
+
+.info-box{
+    background:#f8fbff;
+    border-radius:18px;
+    padding:18px 20px;
+    margin-bottom:18px;
+    border:1px solid #e5edf7;
+    transition:0.3s;
+}
+
+.info-box:hover{
+    background:#eef6ff;
+    transform:translateX(5px);
+}
+
+.info-label{
+    font-weight:700;
+    color:#007bff;
+    margin-right:8px;
+}
+
+/* PRICE */
+
+.price-box{
+    background:linear-gradient(135deg,#007bff,#00c6ff);
+    color:white;
+    padding:22px;
+    border-radius:20px;
+    margin-top:25px;
+    margin-bottom:30px;
+    text-align:center;
+}
+
+.price-box h3{
+    margin:0;
+    font-size:34px;
+    font-weight:700;
+}
+
+/* BUTTON */
+
+.book-btn{
+    display:inline-block;
+    background:linear-gradient(to right,#28a745,#20c997);
+    color:white;
+    padding:15px 35px;
+    border-radius:50px;
+    font-size:17px;
+    font-weight:600;
+    text-decoration:none;
+    transition:0.3s;
+}
+
+.book-btn:hover{
+    background:linear-gradient(to right,#1e7e34,#17a589);
+    transform:scale(1.05);
+    color:white;
+}
+
+/* RESPONSIVE */
+
+@media(max-width:768px){
+
+    .train-title{
+        font-size:30px;
+    }
+
+    .detail-content{
+        padding:30px 20px;
+    }
+
+    .train-image{
+        min-height:300px;
+    }
+
+}
+
+</style>
+
+<div class="container py-5">
+
+    <div class="card detail-card">
+
+        <div class="row g-0">
+
+            <!-- IMAGE -->
+
+            <div class="col-lg-6">
+
+                <div class="image-box">
+
+                    <img src="{{ train.image.url }}"
+                         class="train-image">
+
+                </div>
+
+            </div>
+
+            <!-- DETAILS -->
+
+            <div class="col-lg-6">
+
+                <div class="detail-content">
+
+                    <h2 class="train-title">
+                        🚆 {{ train.name }}
+                    </h2>
+
+                    <div class="custom-line"></div>
+
+                    <!-- FROM -->
+
+                    <div class="info-box">
+
+                        <span class="info-label">
+                            From :
+                        </span>
+
+                        {{ train.from_place }}
+
+                    </div>
+
+                    <!-- TO -->
+
+                    <div class="info-box">
+
+                        <span class="info-label">
+                            To :
+                        </span>
+
+                        {{ train.to_place }}
+
+                    </div>
+
+                    <!-- DESCRIPTION -->
+
+                    <div class="info-box">
+
+                        <span class="info-label">
+                            Description :
+                        </span>
+
+                        {{ train.description }}
+
+                    </div>
+
+                    <!-- PRICE -->
+
+                    <div class="price-box">
+
+                        <h3>
+                            ₹{{ train.price }}
+                        </h3>
+
+                    </div>
+
+                    <!-- BUTTON -->
+
+                    <a href="{% url 'book_train' train.id %}"
+                       class="book-btn">
+
+                        🎫 Book Ticket
+
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}
